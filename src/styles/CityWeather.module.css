@@ -1,0 +1,29 @@
+.container {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.time {
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.temp {
+  font-size: 8rem;
+  transform: translateX(0.08em);
+}
+
+.max__min {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.desc {
+  font-size: 1rem;
+  font-weight: 300;
+}

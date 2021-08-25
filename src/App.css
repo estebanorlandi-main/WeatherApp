@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+body {
+  font-family: "Roboto", sans-serif;
+  height: 100vh;
+  background: url("./img/Background.svg") bottom left no-repeat,
+    linear-gradient(#0e1a83, #0859f5) no-repeat;
+  background-size: contain;
+}
+
+.bg_red {
+  background: red;
+}

@@ -17,6 +17,7 @@ export default function SearchBar({ onSearch, getSuggestions, suggestions }) {
         }}
         type="text"
         list="suggestions"
+        placeholder="Search City..."
       />
       <button type="submit">Search</button>
     </form>
