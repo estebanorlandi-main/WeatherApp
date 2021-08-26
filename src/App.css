@@ -3,11 +3,9 @@
 body {
   font-family: "Roboto", sans-serif;
   height: 100vh;
-  background: url("./img/Background.svg") bottom left no-repeat,
-    linear-gradient(#0e1a83, #0859f5) no-repeat;
-  background-size: contain;
+  background: white;
 }
 
-.bg_red {
-  background: red;
+img {
+  width: 5em;
 }

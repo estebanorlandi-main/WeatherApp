@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-function getImage(img) {
-  return `https://openweathermap.org/img/wn/${img}@2x.png`;
-}
+const icons = {
+  d1: "../../img/Icons/01d.svg",
+};
 
 export default function City({ city }) {
   return (
     <div>
-      <img src={getImage(city.img)} alt="" />
+      <img src={icons[city.img]} alt="" />
 
       <h2>{city.name}</h2>
       <h1>{city.temp}&deg;</h1>
