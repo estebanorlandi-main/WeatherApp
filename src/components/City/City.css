@@ -1,0 +1,31 @@
+.city {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #1e1e2e;
+}
+
+.city__desc {
+  margin-bottom: 2em;
+}
+
+.city__temp {
+  font-size: 4rem;
+  transform: translateX(0);
+}
+
+.min-max {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.min,
+.max {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1em 1em;
+}

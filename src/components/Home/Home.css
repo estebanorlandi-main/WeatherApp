@@ -1,0 +1,12 @@
+.title {
+  width: 80%;
+  text-align: center;
+  margin: 10vh auto;
+  color: #1e1e2e;
+}
+.bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}

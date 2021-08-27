@@ -3,37 +3,11 @@ import { Route } from "react-router-dom";
 
 import API_KEY from "./config.js";
 
+import Home from "./components/Home/Home";
 import Nav from "./components/Navbar/Nav";
 import City from "./components/City/City";
 import About from "./components/About/About";
 import List from "./components/List/List";
-
-import d1 from "./img/Icons/01d.svg";
-import n1 from "./img/Icons/01n.svg";
-
-import d2 from "./img/Icons/02d.svg";
-import n2 from "./img/Icons/02n.svg";
-
-import d3 from "./img/Icons/03d.svg";
-import n3 from "./img/Icons/03n.svg";
-
-import d4 from "./img/Icons/04d.svg";
-import n4 from "./img/Icons/04n.svg";
-
-import d9 from "./img/Icons/09d.svg";
-import n9 from "./img/Icons/09n.svg";
-
-import d10 from "./img/Icons/10d.svg";
-import n10 from "./img/Icons/10n.svg";
-
-import d11 from "./img/Icons/11d.svg";
-import n11 from "./img/Icons/11n.svg";
-
-import d13 from "./img/Icons/13d.svg";
-import n13 from "./img/Icons/13n.svg";
-
-import d50 from "./img/Icons/50d.svg";
-import n50 from "./img/Icons/50n.svg";
 
 import "./App.css";
 
@@ -65,38 +39,21 @@ function App() {
       });
   };
 
+  const onDelete = (id) => {
+    setCities((oldCities) => oldCities.filter((city) => city.id !== id));
+  };
+
   return (
     <div>
-      <Route path="/" render={() => <Nav onSearch={onSearch} />} />
+      {/* Barra de navegacion siempre */}
+      <Nav onSearch={onSearch} />
+
+      <Route exact path="/" component={Home} />
       <Route path="/about" component={About} />
-      <Route path="/List" render={() => <List cities={cities} />} />
-
-      <img src={d1} />
-      <img src={n1} />
-
-      <img src={d2} />
-      <img src={n2} />
-
-      <img src={d3} />
-      <img src={n3} />
-
-      <img src={d4} />
-      <img src={n4} />
-
-      <img src={d9} />
-      <img src={n9} />
-
-      <img src={d10} />
-      <img src={n10} />
-
-      <img src={d11} />
-      <img src={n11} />
-
-      <img src={d13} />
-      <img src={n13} />
-
-      <img src={d50} />
-      <img src={n50} />
+      <Route
+        path="/List"
+        render={() => <List cities={cities} onDelete={onDelete} />}
+      />
 
       <Route
         path="/city/:id"

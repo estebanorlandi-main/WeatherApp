@@ -1,21 +1,26 @@
-import React, { useState } from "react";
-
-const icons = {
-  d1: "../../img/Icons/01d.svg",
-};
+import React from "react";
+import "./City.css";
 
 export default function City({ city }) {
   return (
-    <div>
-      <img src={icons[city.img]} alt="" />
+    <div className="city">
+      <h2 className="city__name">{city.name}</h2>
+      <p className="city__desc">{city.desc}</p>
+      <h1 className="city__temp">{city.temp}&deg;C</h1>
+      <div className="min-max">
+        <div className="min">
+          <span>Min</span>
+          <span>{city.min}&deg;C</span>
+        </div>
+        <div className="max">
+          <span>Max</span>
+          <span>{city.max}&deg;C</span>
+        </div>
+      </div>
 
-      <h2>{city.name}</h2>
-      <h1>{city.temp}&deg;</h1>
-
-      <span>
-        {city.min}&deg; / {city.max}&deg;
-      </span>
-      <p>{city.desc}</p>
+      <div>
+        <div className="min"></div>
+      </div>
     </div>
   );
 }

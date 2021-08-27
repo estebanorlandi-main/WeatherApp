@@ -1,11 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Card({ id, name, temp, max, min }) {
+import "./Card.css";
+import icon from "../../img/Icons/index";
+
+export default function Card({ city, onDelete }) {
+  const formatDate = () => {
+    let t = new Date();
+
+    return `${t.getHours()}:${t.getMinutes()} - ${t.getDate()} / ${t.getMonth()}`;
+  };
+
+  const handleDelete = (id, e) => {
+    onDelete(id);
+  };
+
   return (
-    <li>
-      <Link to={`/city/${id}`}>
-	<span>{name}</span>
+    <li className="item">
+      <button
+        onClick={(e) => handleDelete(city.id, e)}
+        className="card__delete"
+      >
+        X
+      </button>
+      <Link className="card-link" to={`/city/${city.id}`}>
+        <div className="card">
+          <div>
+            <h2 className="card__name"> {city.name} </h2>
+            <span className="card__date">{formatDate()}</span>
+          </div>
+          <img className="card__icon" src={icon(city.img)} alt="" />
+          <h1 className="card__temp"> {city.temp}&deg; C </h1>
+        </div>
       </Link>
     </li>
   );

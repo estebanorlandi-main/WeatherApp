@@ -1,18 +1,13 @@
 import React from "react";
 import Card from "./Card";
 
+import "./List.css";
+
 export default function List(props) {
   return (
-    <ul>
+    <ul className="cards">
       {props.cities.map((city) => (
-        <Card
-          key={city.id}
-          id={city.id}
-          name={city.name}
-          temp={city.temp}
-          max={city.max}
-          min={city.min}
-        />
+        <Card key={city.id} city={city} onDelete={props.onDelete} />
       ))}
     </ul>
   );
