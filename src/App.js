@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Route } from "react-router-dom";
 
-import API_KEY from "./config.js";
-
 import Home from "./components/Home/Home";
 import Nav from "./components/Navbar/Nav";
 import City from "./components/City/City";
@@ -10,6 +8,8 @@ import About from "./components/About/About";
 import List from "./components/List/List";
 
 import "./App.css";
+
+const API_KEY = process.env.API_KEY || require("./config.js");
 
 function App() {
   const [cities, setCities] = useState([]);
