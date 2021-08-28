@@ -22,7 +22,7 @@ function App() {
     )
       .then((res) => {
         if (res.ok) return res.json();
-        throw new Error("City not found.");
+        return Promise.reject({ message: "City not found." });
       })
       .then((data) => {
         const res = {
@@ -50,7 +50,6 @@ function App() {
         setAlert((oldError) => {
           return { type: "error", message: e.message };
         });
-        console.clear();
       });
     setTimeout(
       () =>
