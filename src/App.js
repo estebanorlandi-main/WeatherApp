@@ -9,7 +9,7 @@ import List from "./components/List/List";
 
 import "./App.css";
 
-const API_KEY = process.env.API_KEY || require("./config");
+const API_KEY = process.env.API_KEY || require("./config.js");
 
 function App() {
   const [cities, setCities] = useState([]);
