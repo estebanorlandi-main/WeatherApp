@@ -29,14 +29,15 @@ nav a {
   display: flex;
   width: 3em;
   justify-content: center;
-  color: #555;
+  color: #aaa;
   font-weight: 300;
   text-decoration: none;
   background-color: transparent;
   transition: all 0.25s;
 }
 
-nav a:hover {
+nav a:hover,
+nav a:focus {
   color: #1e1e2e;
 }
 
@@ -51,12 +52,13 @@ nav a::after {
   background-color: #5af;
   transition: all 0.25s;
 }
-nav a:hover::after {
+nav a:hover::after,
+nav a:focus::after {
   width: 100%;
 }
 
 .home {
-  color: #1e1e2e;
+  color: #888;
   font-size: 1.25rem;
   font-weight: bold;
 }
