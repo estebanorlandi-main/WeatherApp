@@ -20,12 +20,11 @@ function App() {
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${API_KEY}&units=metric`
     )
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw new Error("City not found.");
+      })
       .then((data) => {
-        if (!data.main)
-          return setAlert((oldError) => {
-            return { type: "error", message: "City not found" };
-          });
         const res = {
           id: data.id,
           name: data.name,
@@ -46,25 +45,32 @@ function App() {
         setAlert((oldError) => {
           return { type: "success", message: "City added." };
         });
+      })
+      .catch((e) => {
+        setAlert((oldError) => {
+          return { type: "error", message: e.message };
+        });
+        console.clear();
       });
+    setTimeout(
+      () =>
+        setAlert((oldAlert) => {
+          return {};
+        }),
+      6000
+    );
   };
 
   const onDelete = (id) => {
     setCities((oldCities) => oldCities.filter((city) => city.id !== id));
   };
 
-  const onAlertRemove = () => {
-    setAlert((oldError) => {
-      return {};
-    });
-  };
-
   return (
     <div>
-      {alert.message && <Alerts alert={alert} remove={onAlertRemove} />}
-
       {/* Barra de navegacion siempre */}
       <Nav onSearch={onSearch} />
+
+      {alert.message && <Alerts alert={alert} />}
 
       <Route exact path="/" component={Home} />
       <Route path="/about" component={About} />

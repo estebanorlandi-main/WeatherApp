@@ -49,14 +49,17 @@
   color: #fff;
   transition: all 0.25s;
 }
-.card__delete:hover {
+.card__delete:hover,
+.card__delete:focus {
   background-color: #d55;
 }
-.item:hover {
+.item:hover,
+.item:focus-within {
   color: #1e1e2e;
   transform: translateY(-0.5em);
 }
-.card-link:hover {
+.card-link:hover,
+.card-link:focus {
   color: #1e1e2e;
   box-shadow: 0 5px 10px #000;
 }

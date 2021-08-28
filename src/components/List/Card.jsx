@@ -17,12 +17,6 @@ export default function Card({ city, onDelete }) {
 
   return (
     <li className="item">
-      <button
-        onClick={(e) => handleDelete(city.id, e)}
-        className="card__delete"
-      >
-        X
-      </button>
       <Link className="card-link" to={`/city/${city.id}`}>
         <div className="card">
           <div>
@@ -33,6 +27,12 @@ export default function Card({ city, onDelete }) {
           <h1 className="card__temp"> {city.temp}&deg; C </h1>
         </div>
       </Link>
+      <button
+        onClick={(e) => handleDelete(city.id, e)}
+        className="card__delete"
+      >
+        X
+      </button>
     </li>
   );
 }
