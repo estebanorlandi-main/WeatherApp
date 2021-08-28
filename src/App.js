@@ -6,21 +6,26 @@ import Nav from "./components/Navbar/Nav";
 import City from "./components/City/City";
 import About from "./components/About/About";
 import List from "./components/List/List";
+import Alerts from "./components/Alerts/Alerts";
 
 import "./App.css";
 
-const API_KEY = process.env.API_KEY || require("./config.js");
+const API_KEY = process.env.REACT_APP_API_KEY || require("./config.js").API_KEY;
 
 function App() {
   const [cities, setCities] = useState([]);
+  const [alert, setAlert] = useState({});
 
   const onSearch = (name) => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${API_KEY.weather}&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${API_KEY}&units=metric`
     )
       .then((res) => res.json())
       .then((data) => {
-        if (!data.main) return console.log("city doesn't exist");
+        if (!data.main)
+          return setAlert((oldError) => {
+            return { type: "error", message: "City not found" };
+          });
         const res = {
           id: data.id,
           name: data.name,
@@ -32,10 +37,15 @@ function App() {
         };
 
         if (cities.filter((city) => city.id === res.id).length) {
-          return console.log("city already exist");
+          return setAlert((oldError) => {
+            return { type: "error", message: "City already save." };
+          });
         }
 
         setCities((oldCities) => [res, ...oldCities]);
+        setAlert((oldError) => {
+          return { type: "success", message: "City added." };
+        });
       });
   };
 
@@ -43,8 +53,16 @@ function App() {
     setCities((oldCities) => oldCities.filter((city) => city.id !== id));
   };
 
+  const onAlertRemove = () => {
+    setAlert((oldError) => {
+      return {};
+    });
+  };
+
   return (
     <div>
+      {alert.message && <Alerts alert={alert} remove={onAlertRemove} />}
+
       {/* Barra de navegacion siempre */}
       <Nav onSearch={onSearch} />
 
