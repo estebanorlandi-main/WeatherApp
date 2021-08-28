@@ -54,7 +54,7 @@
 }
 .item:hover {
   color: #1e1e2e;
-  transform: translateY(-1em);
+  transform: translateY(-0.5em);
 }
 .card-link:hover {
   color: #1e1e2e;
