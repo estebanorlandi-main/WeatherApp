@@ -16,7 +16,7 @@ function App() {
 
   const onSearch = (name) => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${API_KEY.weather}&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${API_KEY}&units=metric`
     )
       .then((res) => res.json())
       .then((data) => {
