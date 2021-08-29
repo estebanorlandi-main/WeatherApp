@@ -1,0 +1,12 @@
+h1 {
+  color: #555;
+  margin-top: 2em;
+}
+.container {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.text {
+  margin-top: 1em;
+}
