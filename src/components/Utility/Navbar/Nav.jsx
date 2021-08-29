@@ -6,29 +6,29 @@ import "./Navbar.css";
 export default function Nav(props) {
   const [menuIsActive, setMenu] = useState(false);
 
-  const handleMenu = (e) => {
+  const handleMenu = () => {
     setMenu((oldMenu) => !menuIsActive);
   };
 
   return (
     <nav>
-      <div className="container">
+      <div className="nav__container">
         <button onClick={handleMenu} className="btn-menu">
-          {menuIsActive ? "x" : "-"}
+          {menuIsActive ? "x" : "-"}{" "}
         </button>
-        <ul className={menuIsActive ? `menu show` : `menu hide`}>
-          <li>
-            <Link onClick={handleMenu} className="home" to="/">
+        <ul className={`menu ${menuIsActive ? "show" : "hide"}`}>
+          <li className="menu__item">
+            <Link className="menu__link home" to="/">
               <span>Home</span>
             </Link>
           </li>
-          <li>
-            <Link onClick={handleMenu} to="/about">
+          <li className="menu__item">
+            <Link className="menu__link" to="/about">
               <span>About</span>
             </Link>
           </li>
-          <li>
-            <Link onClick={handleMenu} to="/List">
+          <li className="menu__item">
+            <Link className="menu__link" to="/List">
               <span>List</span>
             </Link>
           </li>
