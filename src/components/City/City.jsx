@@ -1,9 +1,10 @@
 import React from "react";
 import "./City.css";
 import getIcon from "../../img/Icons/index";
+import sadCloudy from "../../img/Icons/something_wrong.svg";
 
 export default function City({ city }) {
-  return (
+  return city ? (
     <div className="city">
       <img className="bg-icon" src={getIcon(city.img)} alt="" />
       <h2 className="city__name">{city.name}</h2>
@@ -20,5 +21,7 @@ export default function City({ city }) {
         </div>
       </div>
     </div>
+  ) : (
+    <img src={sadCloudy} alt="somenthing wrong" />
   );
 }

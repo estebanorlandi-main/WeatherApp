@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 import icon from "../../img/Icons/no_cities.svg";
 
-import "./List.css";
+import "./ListCities.css";
 
 export default function List(props) {
   const cardCities = props.cities.map((city) => (

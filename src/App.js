@@ -1,73 +1,57 @@
 import React, { useState } from "react";
 import { Route, useLocation } from "react-router-dom";
 
+// Pages
 import Home from "./components/Home/Home";
-import Nav from "./components/Navbar/Nav";
-import City from "./components/City/City";
 import About from "./components/About/About";
-import List from "./components/List/List";
-import Alerts from "./components/Alerts/Alerts";
+import ListCities from "./components/ListCities/ListCities";
+import City from "./components/City/City";
+
+// Utility
+import Nav from "./components/Utility/Navbar/Nav";
+import Alerts from "./components/Utility/Alerts/Alerts";
+import getData from "./utility/getData";
 
 import "./App.css";
-
-const API_KEY = process.env.REACT_APP_API_KEY || require("./config.js").API_KEY;
 
 function App() {
   const [cities, setCities] = useState([]);
   const [alert, setAlert] = useState({});
 
   const onSearch = (name) => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${API_KEY}&units=metric`
-    )
-      .then((res) => {
-        if (res.ok) return res.json();
-        return Promise.reject({ message: "City not found." });
-      })
-      .then((data) => {
-        const res = {
-          id: data.id,
-          name: data.name,
-          img: data.weather[0].icon,
-          temp: Math.floor(data.main.temp),
-          min: Math.floor(data.main.temp_min),
-          max: Math.floor(data.main.temp_max),
-          desc: data.weather[0].description,
-        };
+    const saveData = (city) => {
+      setCities((oldCities) => [city, ...oldCities]);
+    };
 
-        if (cities.filter((city) => city.id === res.id).length) {
-          return setAlert((oldError) => {
-            return { type: "error", message: "City already save." };
-          });
-        }
-
-        setCities((oldCities) => [res, ...oldCities]);
-        setAlert((oldError) => {
-          return { type: "success", message: "City added." };
-        });
-      })
-      .catch((e) => {
-        setAlert((oldError) => {
-          return { type: "error", message: e.message };
-        });
+    const createAlert = ({ type, message }) => {
+      setAlert((oldAlert) => {
+        return { type, message };
       });
+    };
+
+    const cityExist = (id) => {
+      return cities.filter((city) => city.id === id).length;
+    };
+
+    getData(name, saveData, createAlert, cityExist);
+
     setTimeout(
       () =>
         setAlert((oldAlert) => {
           return {};
         }),
-      6000
+      5000
     );
   };
 
-  const onDelete = (id) => {
+  // Delete city
+  const deleteCity = (id) => {
     setCities((oldCities) => oldCities.filter((city) => city.id !== id));
   };
 
   const location = useLocation();
 
-  // este regex funciona con las paginas ( home - about - city )
-  //
+  // Target pages with REGEX ( home - about - city )
   // /^\/(about|(city\/[0-9]+))?$/
 
   if (/^\/(about|(city\/[0-9]+))?$/.test(location.pathname)) {
@@ -80,7 +64,7 @@ function App() {
 
   return (
     <div>
-      {/* Barra de navegacion siempre */}
+      {/* Nav always on top */}
       <Nav onSearch={onSearch} />
 
       {alert.message && <Alerts alert={alert} />}
@@ -89,7 +73,7 @@ function App() {
       <Route path="/about" component={About} />
       <Route
         path="/List"
-        render={() => <List cities={cities} onDelete={onDelete} />}
+        render={() => <ListCities cities={cities} onDelete={deleteCity} />}
       />
 
       <Route
