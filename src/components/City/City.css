@@ -31,10 +31,18 @@
 .bg-icon {
   position: absolute;
   right: 0;
-  top: 50%;
-
-  transform: translate(50%, -50%);
+  transform: translateX(150%);
   z-index: -1;
-  width: 50vw;
+  width: 25em;
   opacity: 0.5;
+  animation: rf 1s alternate forwards;
+}
+
+@keyframes rf {
+  from {
+    transform: translateX(150%);
+  }
+  to {
+    transform: translateX(50%);
+  }
 }

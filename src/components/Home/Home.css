@@ -1,12 +1,37 @@
 .title {
+  transform: translateY(-2em);
+  opacity: 0;
   width: 80%;
   text-align: center;
   margin: 10vh auto;
   color: #1e1e2e;
+  animation: tb-fade-in 1s alternate forwards;
 }
 .bg {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
+  animation: bt-fade-in 1s alternate forwards;
+}
+
+@keyframes tb-fade-in {
+  0% {
+    transform: translateY(-5em);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes bt-fade-in {
+  0% {
+    transform: translateY(5em);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

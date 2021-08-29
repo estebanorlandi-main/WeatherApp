@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Route } from "react-router-dom";
+import { Route, useLocation } from "react-router-dom";
 
 import Home from "./components/Home/Home";
 import Nav from "./components/Navbar/Nav";
@@ -63,6 +63,20 @@ function App() {
   const onDelete = (id) => {
     setCities((oldCities) => oldCities.filter((city) => city.id !== id));
   };
+
+  const location = useLocation();
+
+  // este regex funciona con las paginas ( home - about - city )
+  //
+  // /^\/(about|(city\/[0-9]+))?$/
+
+  if (/^\/(about|(city\/[0-9]+))?$/.test(location.pathname)) {
+    document.body.style.maxHeight = "100vh";
+    document.body.style.overflowY = "hidden";
+  } else {
+    document.body.style.maxHeight = "auto";
+    document.body.style.overflowY = "auto";
+  }
 
   return (
     <div>
