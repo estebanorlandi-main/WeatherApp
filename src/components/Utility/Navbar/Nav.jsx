@@ -14,7 +14,7 @@ export default function Nav(props) {
     <nav>
       <div className="nav__container">
         <button onClick={handleMenu} className="btn-menu">
-          {menuIsActive ? "x" : "-"}{" "}
+          {menuIsActive ? "x" : "-"}
         </button>
         <ul className={`menu ${menuIsActive ? "show" : "hide"}`}>
           <li className="menu__item">
