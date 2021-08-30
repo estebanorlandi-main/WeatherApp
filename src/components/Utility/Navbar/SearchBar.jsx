@@ -16,9 +16,18 @@ export default function SearchBar({ onSearch, hashedList }) {
     if (name) cb(name);
   };
 
-  const filterHash = (key, value) => {
+  const filterHash = (value) => {
+    const key = hashedList[value.charCodeAt(0)]
+      ? value.charCodeAt(0)
+      : value.toUpperCase().charCodeAt(0);
+
+    value = value.toLowerCase();
+
     const r = new RegExp(`^(${value.replaceAll(" ", "\\s")})+`);
-    const filteredData = hashedList[key].filter((city) => r.test(city.name));
+
+    const filteredData = hashedList[key].filter((city) =>
+      r.test(city.name.toLowerCase())
+    );
 
     setDatalist((oldData) =>
       filteredData.slice(0, filteredData.length > 5 ? 5 : filteredData.length)
@@ -33,7 +42,7 @@ export default function SearchBar({ onSearch, hashedList }) {
       <input
         onChange={(e) => {
           const value = e.target.value;
-          if (value) filterHash(value.charCodeAt(0), value);
+          if (value) filterHash(value);
           setSearch((oldSearch) => value);
         }}
         className="search__input"
