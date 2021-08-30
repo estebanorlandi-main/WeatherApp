@@ -18,18 +18,6 @@ import "./App.css";
 import datalist from "./utility/city.list.json";
 
 function App() {
-  const makeHash = (datalist) => {
-    const obj = {};
-    for (let i = 0; i < datalist.length; i++) {
-      let key = datalist[i].name.charCodeAt(0);
-      if (!obj[key] && !Array.isArray(obj[key])) obj[key] = [];
-      obj[key].push(datalist[i]);
-    }
-    return obj;
-  };
-
-  const hashedList = makeHash(datalist);
-
   const [cities, setCities] = useState([]);
   const [alert, setAlert] = useState({});
 
@@ -81,7 +69,7 @@ function App() {
     <div>
       {/* Nav always on top */}
 
-      <Nav onSearch={onSearch} hashedList={hashedList} />
+      <Nav onSearch={onSearch} hashedList={datalist} />
 
       {alert.message && <Alerts alert={alert} />}
       <Switch>

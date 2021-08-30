@@ -20,8 +20,6 @@ export default function SearchBar({ onSearch, hashedList }) {
     const r = new RegExp(`^(${value.replaceAll(" ", "\\s")})+`);
     const filteredData = hashedList[key].filter((city) => r.test(city.name));
 
-    console.log(filteredData);
-
     setDatalist((oldData) =>
       filteredData.slice(0, filteredData.length > 5 ? 5 : filteredData.length)
     );
