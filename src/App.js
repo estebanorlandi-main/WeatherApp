@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Route, useLocation } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 
 // Pages
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import ListCities from "./components/ListCities/ListCities";
 import City from "./components/City/City";
+import NotFound from "./components/404/index";
 
 // Utility
 import Nav from "./components/Utility/Navbar/Nav";
@@ -14,7 +15,21 @@ import getData from "./utility/getData";
 
 import "./App.css";
 
+import datalist from "./utility/city.list.json";
+
 function App() {
+  const makeHash = (datalist) => {
+    const obj = {};
+    for (let i = 0; i < datalist.length; i++) {
+      let key = datalist[i].name.charCodeAt(0);
+      if (!obj[key] && !Array.isArray(obj[key])) obj[key] = [];
+      obj[key].push(datalist[i]);
+    }
+    return obj;
+  };
+
+  const hashedList = makeHash(datalist);
+
   const [cities, setCities] = useState([]);
   const [alert, setAlert] = useState({});
 
@@ -65,27 +80,31 @@ function App() {
   return (
     <div>
       {/* Nav always on top */}
-      <Nav onSearch={onSearch} />
+
+      <Nav onSearch={onSearch} hashedList={hashedList} />
 
       {alert.message && <Alerts alert={alert} />}
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route
+          path="/List"
+          render={() => <ListCities cities={cities} onDelete={deleteCity} />}
+        />
 
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route
-        path="/List"
-        render={() => <ListCities cities={cities} onDelete={deleteCity} />}
-      />
+        <Route
+          path="/city/:id"
+          render={({ match }) => (
+            <City
+              city={
+                cities.filter((val) => val.id === parseInt(match.params.id))[0]
+              }
+            />
+          )}
+        />
 
-      <Route
-        path="/city/:id"
-        render={({ match }) => (
-          <City
-            city={
-              cities.filter((val) => val.id === parseInt(match.params.id))[0]
-            }
-          />
-        )}
-      />
+        <Route component={NotFound} />
+      </Switch>
     </div>
   );
 }

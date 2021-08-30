@@ -5,7 +5,7 @@ import "./Card.css";
 import icon from "../../img/Icons/index";
 
 export default function Card({ city, onDelete }) {
-  const formatDate = () => {
+  /*const formatDate = () => {
     let t = new Date();
 
     return `${t.getHours()}:${t.getMinutes()} - ${t.getDate()} / ${t.getMonth()}`;
@@ -13,7 +13,7 @@ export default function Card({ city, onDelete }) {
 
   const handleDelete = (id, e) => {
     onDelete(id);
-  };
+  };*/
 
   return (
     <li className="item">
@@ -21,16 +21,12 @@ export default function Card({ city, onDelete }) {
         <div className="card">
           <div>
             <h2 className="card__name"> {city.name} </h2>
-            <span className="card__date">{formatDate()}</span>
           </div>
           <img className="card__icon" src={icon(city.img)} alt="" />
           <h1 className="card__temp"> {city.temp}&deg; C </h1>
         </div>
       </Link>
-      <button
-        onClick={(e) => handleDelete(city.id, e)}
-        className="card__delete"
-      >
+      <button onClick={() => onDelete(city.id)} className="card__delete">
         X
       </button>
     </li>

@@ -18,22 +18,22 @@ export default function Nav(props) {
         </button>
         <ul className={`menu ${menuIsActive ? "show" : "hide"}`}>
           <li className="menu__item">
-            <Link className="menu__link home" to="/">
+            <Link onClick={handleMenu} className="menu__link home" to="/">
               <span>Home</span>
             </Link>
           </li>
           <li className="menu__item">
-            <Link className="menu__link" to="/about">
+            <Link onClick={handleMenu} className="menu__link" to="/about">
               <span>About</span>
             </Link>
           </li>
           <li className="menu__item">
-            <Link className="menu__link" to="/List">
+            <Link onClick={handleMenu} className="menu__link" to="/List">
               <span>List</span>
             </Link>
           </li>
         </ul>
-        <SearchBar onSearch={props.onSearch} />
+        <SearchBar onSearch={props.onSearch} hashedList={props.hashedList} />
       </div>
     </nav>
   );

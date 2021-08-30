@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./Search.css";
 
-export default function SearchBar({ onSearch, getSuggestions, suggestions }) {
+export default function SearchBar({ onSearch, hashedList }) {
   const [search, setSearch] = useState("");
+  const [datalist, setDatalist] = useState("");
 
   const handleSubmit = (e, cb, name) => {
     // Seleccionar el input y eliminar el valor
@@ -15,6 +16,17 @@ export default function SearchBar({ onSearch, getSuggestions, suggestions }) {
     if (name) cb(name);
   };
 
+  const filterHash = (key, value) => {
+    const r = new RegExp(`^(${value.replaceAll(" ", "\\s")})+`);
+    const filteredData = hashedList[key].filter((city) => r.test(city.name));
+
+    console.log(filteredData);
+
+    setDatalist((oldData) =>
+      filteredData.slice(0, filteredData.length > 5 ? 5 : filteredData.length)
+    );
+  };
+
   return (
     <form
       className="search"
@@ -22,13 +34,21 @@ export default function SearchBar({ onSearch, getSuggestions, suggestions }) {
     >
       <input
         onChange={(e) => {
-          setSearch((oldSearch) => e.target.value);
+          const value = e.target.value;
+          if (value) filterHash(value.charCodeAt(0), value);
+          setSearch((oldSearch) => value);
         }}
         className="search__input"
         type="text"
         list="suggestions"
         placeholder="Search City..."
+        autoComplete="off"
       />
+      <datalist id="suggestions">
+        {datalist
+          ? datalist.map((city) => <option key={city.id} value={city.name} />)
+          : ""}
+      </datalist>
       <button className="search__btn" type="submit">
         Search
       </button>
