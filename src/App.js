@@ -11,72 +11,45 @@ import NotFound from "./components/404/index";
 // Utility
 import Nav from "./components/Utility/Navbar/Nav";
 import Alerts from "./components/Utility/Alerts/Alerts";
-import getData from "./utility/getData";
+import storeData from "./utility/getData";
 
 import "./App.css";
 
 import datalist from "./utility/city.list.json";
 
-function App() {
-  const filterDataList = () => {
-    const newData = {};
-
-    for (let key in datalist) {
-      newData[key] = [];
-      for (let i = 0; i < datalist[key].length; i++) {
-        newData[key].push({ name: datalist[key][i].name });
-      }
-    }
-    return newData;
-  };
-
-  var json = JSON.stringify(filterDataList());
-
-  json = [json];
-
-  const bl1 = new Blob(json, { type: "text/play;charset=utf-8" });
-
-  var url = window.URL || window.webkitURL;
-
-  const link = url.createObjectURL(bl1);
-
-  let downloadFile = (
-    <a download="city.list.json" href={link}>
-      download
-    </a>
-  );
-
+export default function App() {
   const [cities, setCities] = useState([]);
   const [alert, setAlert] = useState({});
+
+  const createAlert = ({ type, message }) => {
+    setAlert((oldAlert) => {
+      return { type, message };
+    });
+  };
 
   const onSearch = (name) => {
     const saveData = (city) => {
       setCities((oldCities) => [city, ...oldCities]);
     };
 
-    const createAlert = ({ type, message }) => {
-      setAlert((oldAlert) => {
-        return { type, message };
-      });
-    };
-
     const cityExist = (id) => {
       return cities.filter((city) => city.id === id).length;
     };
 
-    getData(name, saveData, createAlert, cityExist);
+    storeData(name, saveData, createAlert, cityExist);
 
     setTimeout(
       () =>
         setAlert((oldAlert) => {
           return {};
         }),
-      5000
+      4000
     );
   };
 
   // Delete city
   const deleteCity = (id) => {
+    createAlert({ type: "error", message: "City removed" });
     setCities((oldCities) => oldCities.filter((city) => city.id !== id));
   };
 
@@ -96,9 +69,6 @@ function App() {
   return (
     <div>
       {/* Nav always on top */}
-
-      {downloadFile}
-
       <Nav onSearch={onSearch} hashedList={datalist} />
 
       {alert.message && <Alerts alert={alert} />}
@@ -126,5 +96,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
