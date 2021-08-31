@@ -58,12 +58,11 @@ export default function App() {
   // Target pages with REGEX ( home - about - city )
   // /^\/(about|(city\/[0-9]+))?$/
 
-  if (/^\/(about|(city\/[0-9]+))?$/.test(location.pathname)) {
+  if (/^\/(about|city)?/.test(location.pathname)) {
+    document.body.style.height = "100vh";
     document.body.style.maxHeight = "100vh";
-    document.body.style.overflowY = "hidden";
+    document.body.style.overflow = "hidden";
   } else {
-    document.body.style.maxHeight = "auto";
-    document.body.style.overflowY = "auto";
   }
 
   return (
