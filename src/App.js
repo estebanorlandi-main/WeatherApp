@@ -18,6 +18,34 @@ import "./App.css";
 import datalist from "./utility/city.list.json";
 
 function App() {
+  const filterDataList = () => {
+    const newData = {};
+
+    for (let key in datalist) {
+      newData[key] = [];
+      for (let i = 0; i < datalist[key].length; i++) {
+        newData[key].push({ name: datalist[key][i].name });
+      }
+    }
+    return newData;
+  };
+
+  var json = JSON.stringify(filterDataList());
+
+  json = [json];
+
+  const bl1 = new Blob(json, { type: "text/play;charset=utf-8" });
+
+  var url = window.URL || window.webkitURL;
+
+  const link = url.createObjectURL(bl1);
+
+  let downloadFile = (
+    <a download="city.list.json" href={link}>
+      download
+    </a>
+  );
+
   const [cities, setCities] = useState([]);
   const [alert, setAlert] = useState({});
 
@@ -68,6 +96,8 @@ function App() {
   return (
     <div>
       {/* Nav always on top */}
+
+      {downloadFile}
 
       <Nav onSearch={onSearch} hashedList={datalist} />
 
