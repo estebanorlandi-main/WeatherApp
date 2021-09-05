@@ -15,8 +15,6 @@ import storeData from "./utility/getData";
 
 import "./App.css";
 
-import datalist from "./utility/city.list.json";
-
 export default function App() {
   const [cities, setCities] = useState([]);
   const [alert, setAlert] = useState({});
@@ -68,7 +66,7 @@ export default function App() {
   return (
     <div>
       {/* Nav always on top */}
-      <Nav onSearch={onSearch} hashedList={datalist} />
+      <Nav onSearch={onSearch} />
 
       {alert.message && <Alerts alert={alert} />}
       <Switch>

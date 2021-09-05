@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Search.css";
 
-export default function SearchBar({ onSearch, hashedList }) {
+let hashedList = null;
+
+(async () => {
+  await import("../../../utility/city.list.json").then((data) => {
+    hashedList = data;
+  });
+})();
+
+export default function SearchBar({ onSearch }) {
   const [search, setSearch] = useState("");
   const [datalist, setDatalist] = useState("");
+
+  useEffect(() => {
+    if (hashedList) console.log("hola");
+  });
 
   const handleSubmit = (e, cb, name) => {
     // Seleccionar el input y eliminar el valor
@@ -42,7 +54,7 @@ export default function SearchBar({ onSearch, hashedList }) {
       <input
         onChange={(e) => {
           const value = e.target.value;
-          if (value) filterHash(value);
+          if (value && hashedList) filterHash(value);
           setSearch((oldSearch) => value);
         }}
         className="search__input"
@@ -50,10 +62,11 @@ export default function SearchBar({ onSearch, hashedList }) {
         list="suggestions"
         placeholder="Search City..."
         autoComplete="off"
+        autoFocus="on"
       />
       <datalist id="suggestions">
         {datalist
-          ? datalist.map((city) => <option key={city.id} value={city.name} />)
+          ? datalist.map((city, i) => <option key={i} value={city.name} />)
           : ""}
       </datalist>
       <button className="search__btn" type="submit">

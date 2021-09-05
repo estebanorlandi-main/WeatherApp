@@ -33,7 +33,7 @@ export default function Nav(props) {
             </Link>
           </li>
         </ul>
-        <SearchBar onSearch={props.onSearch} hashedList={props.hashedList} />
+        <SearchBar onSearch={props.onSearch} />
       </div>
     </nav>
   );
