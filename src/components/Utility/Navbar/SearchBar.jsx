@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Search.css";
 
 let hashedList = null;
@@ -12,10 +12,6 @@ let hashedList = null;
 export default function SearchBar({ onSearch }) {
   const [search, setSearch] = useState("");
   const [datalist, setDatalist] = useState("");
-
-  useEffect(() => {
-    if (hashedList) console.log("hola");
-  });
 
   const handleSubmit = (e, cb, name) => {
     // Seleccionar el input y eliminar el valor
