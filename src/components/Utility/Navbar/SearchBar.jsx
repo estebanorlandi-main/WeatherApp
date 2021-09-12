@@ -27,7 +27,7 @@ export default function SearchBar({ onSearch }) {
   const filterHash = (value) => {
     const key = hashedList[value.charCodeAt(0)]
       ? value.charCodeAt(0)
-      : value.toUpperCase().charCodeAt(0);
+      : value.toLowerCase().charCodeAt(0);
 
     value = value.toLowerCase();
 
