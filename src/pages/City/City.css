@@ -1,0 +1,51 @@
+.f-inline {
+  display: flex;
+}
+.f-col {
+  display: flex;
+  flex-direction: column;
+}
+.mx-1 {
+  margin: auto 1em;
+}
+.my-1 {
+  margin: 1em 0;
+}
+
+.city {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #1e1e2e;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  max-width: 100vw;
+}
+.city__desc {
+  margin-bottom: 2em;
+}
+.city__temp {
+  font-size: 4rem;
+  transform: translateX(0);
+}
+
+.bg-icon {
+  position: absolute;
+  right: 0;
+  transform: translateX(150%);
+  z-index: -1;
+  width: 25em;
+  opacity: 0.5;
+  animation: rf 1s alternate forwards;
+}
+
+@keyframes rf {
+  from {
+    transform: translateX(150%);
+  }
+  to {
+    transform: translateX(50%);
+  }
+}
