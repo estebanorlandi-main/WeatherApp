@@ -32,9 +32,9 @@ export default function App() {
         setCities((oldCities) => [...oldCities, cityModel]);
       });
   };
+
   const toFavorite = (id) => {
     if (favorites.length > 2) return;
-
     setFavorites((oldFavorites) => [...oldFavorites, id]);
   };
 
